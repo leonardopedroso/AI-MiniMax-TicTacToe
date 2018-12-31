@@ -9,11 +9,12 @@ TTTgrid::TTTgrid(){
 		}
 	}
 
+
 }
 
 void TTTgrid::display(){
 
-	printf("--------------------------\n");
+	printf("----------------------\n");
 	printf("+ - + - + - +\n");
 	unsigned char c;
 	for(char i = 0; i < SIZE_GRID; i++){
@@ -45,16 +46,91 @@ void TTTgrid::display(){
 
 		}
 	}
-	printf("--------------------------\n");
+	printf("----------------------\n");
 }
 
-void TTTgrid::add(char i, char j, char symbol){
+void TTTgrid::add(char move, char symbol){
 
-	grid[i][j] = symbol;
+	grid[move/SIZE_GRID][move%SIZE_GRID] = symbol;
 }
 
 char TTTgrid::status(){
 
-	return WIN_A;
+	// Run rows
+	for(char i = 0; i < SIZE_GRID; i++){
+
+		if(grid[i][0] != BLANK){
+			for(char j = 1; j < SIZE_GRID; j++){
+
+				if(grid[i][j] == grid[i][0]){
+					printf("same\n");
+					if(j == SIZE_GRID-1){
+						return grid[i][0]-1;
+					}else
+						continue;
+				}else
+					break;
+			}
+		}
+		
+	}
+
+	// Run columns
+	for(char j = 0; j < SIZE_GRID; j++){
+		if(grid[0][j] != BLANK){	
+			for(char i = 1; i < SIZE_GRID; i++){
+				if(grid[i][j] == grid[0][j]){
+					if(i == SIZE_GRID-1){
+						return grid[0][j]-1;
+					}else
+						continue;
+				}else{
+					break;
+				}
+			}
+		}
+	}
+
+	// Principal diagonal
+	if(grid[0][0] != BLANK){	
+		for (char i = 1; i < SIZE_GRID; ++i){
+			if(grid[i][i] == grid[0][0]){
+				if(i == SIZE_GRID-1){
+					return grid[0][0]-1;
+				}else{
+					continue;
+				}
+			}else{
+				break;
+			}
+		}
+	}
+
+	// Secondary diagonal
+	if(grid[0][SIZE_GRID-1] != BLANK){
+		for (char i = 1; i < SIZE_GRID; ++i){
+			if(grid[i][SIZE_GRID-1-i] == grid[0][SIZE_GRID-1]){
+				if(i == SIZE_GRID-1){
+					return grid[0][SIZE_GRID-1]-1;
+				}else{
+					continue;
+				}
+			}else{
+				break;
+			}
+		}
+	}
+
+	// Check unfinishec
+	for(char i = 0; i < SIZE_GRID; i++){
+		for(char j = 0; j < SIZE_GRID; j++){
+			if(grid[i][j] == BLANK){
+				return UNFINISHED;
+			}
+			
+		}
+	}
+
+	return DRAW;
 }
 

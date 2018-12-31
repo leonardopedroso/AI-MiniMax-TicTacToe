@@ -3,9 +3,9 @@
 
 #define SIZE_GRID 3
 
-#define BLANK 0
-#define CROSS 1
-#define BALL  2
+#define BLANK 1
+#define CROSS 2
+#define BALL  0
 
 #define BLANK_CHAR 32
 #define CROSS_CHAR 88
@@ -29,7 +29,7 @@ public:
 
 	//Methods
 	void display();
-	void add(char i, char j, char symbol);
+	void add(char move, char symbol);
 	char status();
 
 private:

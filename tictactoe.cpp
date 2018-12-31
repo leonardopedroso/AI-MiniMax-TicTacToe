@@ -2,7 +2,6 @@
 #include "parseOpts.h"
 #include "players2Game.h"
 
-using namespace std;
 
 int main(int argc, char const *argv[])
 {
@@ -17,7 +16,7 @@ int main(int argc, char const *argv[])
 					printf("It's a draw!\n");
 					break;
 				case WIN_B:
-					printf("Player B won\n");
+					printf("Player B won!\n");
 					break;
 			}
 			break;
