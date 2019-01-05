@@ -1,11 +1,10 @@
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "baseHeader.h"
 #include <string.h>
 
 #define PARSE_ERR 0
-#define PLAYERS2  1
-#define AI        2
+/*#define PLAYERS2  1
+#define AI        2*/
 
 #define PLAYERS2_STR "-p"
 #define AI_STR       "-a"

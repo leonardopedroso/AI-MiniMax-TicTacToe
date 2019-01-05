@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
 
-#define SIZE_GRID 3
+#include "baseHeader.h"
 
 #define BLANK 1
 #define CROSS 2
@@ -31,9 +29,12 @@ public:
 	void display();
 	void add(char move, char symbol);
 	char status();
+	void displayRaw();
 
 private:
 
 
 };
+
+void copyTTTgrid(TTTgrid * to, TTTgrid * from);
 

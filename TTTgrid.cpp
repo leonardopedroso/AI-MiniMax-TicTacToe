@@ -49,8 +49,34 @@ void TTTgrid::display(){
 	printf("----------------------\n");
 }
 
-void TTTgrid::add(char move, char symbol){
+void TTTgrid::displayRaw(){
 
+	printf("----------------------\n");
+	printf("+ - + - + - +\n");
+	unsigned char c;
+	for(char i = 0; i < SIZE_GRID; i++){
+		for(char j = 0; j < SIZE_GRID; j++){
+
+			if(j == 0)
+				printf("|");
+
+			c = grid[i][j];
+
+			printf(" %d ", c);
+
+			if(j == SIZE_GRID -1){
+				printf("|\n");
+				printf("+ - + - + - +\n");
+			}
+			else
+				printf("|");
+
+		}
+	}
+	printf("----------------------\n");
+}
+
+void TTTgrid::add(char move, char symbol){
 	grid[move/SIZE_GRID][move%SIZE_GRID] = symbol;
 }
 
@@ -63,7 +89,6 @@ char TTTgrid::status(){
 			for(char j = 1; j < SIZE_GRID; j++){
 
 				if(grid[i][j] == grid[i][0]){
-					printf("same\n");
 					if(j == SIZE_GRID-1){
 						return grid[i][0]-1;
 					}else
@@ -134,3 +159,15 @@ char TTTgrid::status(){
 	return DRAW;
 }
 
+
+void copyTTTgrid(TTTgrid * to, TTTgrid * from){
+	for(char i = 0; i < SIZE_GRID; i++){
+		for(char j = 0; j < SIZE_GRID; j++){
+			to->grid[i][j] = from->grid[i][j];
+		}
+	}
+
+}
+
+
+	

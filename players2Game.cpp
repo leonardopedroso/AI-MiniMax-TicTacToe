@@ -1,17 +1,49 @@
 
 #include "players2Game.h"
 
-char players2Game(){
+//#define DEBUG
+
+char players2Game(char MODE){
+
+#ifdef DEBUG
 
 	TTTgrid game;
-
 	char nextplayer = PLAYER_A;
 	char move;
 
-	do{
+	game.add(0,symbol(PLAYER_A));
+	game.add(4,symbol(PLAYER_A));
+	game.add(1,symbol(PLAYER_B));
+	game.add(2,symbol(PLAYER_B));
+	game.add(3,symbol(PLAYER_B));
+	game.add(7,symbol(PLAYER_B));
 
+	game.display();
+
+	move = -1;
+	getAiMove(game, &move);
+
+	printf("move %d\n", move);
+
+	return 7;
+
+#else
+
+	TTTgrid game;
+	srand(time(NULL));
+	char nextplayer = PLAYER_A + rand()%2;
+	char move;
+
+	do{
 		game.display();
-		getMove(&game, &move, &nextplayer);
+
+		if(MODE == PLAYERS2 || nextplayer == PLAYER_B){
+			getHumanMove(&game, &move, &nextplayer);
+		}else{
+			move = -1;
+			getAiMove(game, &move);
+			printf("move %d\n", move);
+		}
 		game.add(move, symbol(nextplayer));
 		updateNextPlayer(&nextplayer);
 
@@ -20,30 +52,19 @@ char players2Game(){
 	game.display();
 
 	return game.status();
+#endif
+
 }
 
-void getMove(TTTgrid * game, char * move, char * player){
+void getHumanMove(TTTgrid * game, char * move, char * player){
 
 	char move1;
 	char move2;
 
-	printf("Move for player %c: ", *player);
-	
-
-	/*while(scanf("%c,%c", &move1, &move2) != 2 || !moveIsValid(game, move1-ASCII_OFFSET, move2-ASCII_OFFSET)){
-		char c;
-		do{
-			c = getchar();
-			printf("got one %d\n",c);
-		}while(c!='\n');
-
-		printf("Move for player %c: ", *player);
-	}*/
-	
 	char convertions;
 
 	do{
-
+		printf("Move for player %c: ", *player);
 		convertions = scanf("%c,%c", &move1, &move2);
 
 		char c;
@@ -56,15 +77,15 @@ void getMove(TTTgrid * game, char * move, char * player){
 	*move = (move1-ASCII_OFFSET)*SIZE_GRID+(move2-ASCII_OFFSET);
 }
 
-void updateNextPlayer(char * nextplayer){
+/*void updateNextPlayer(char * nextplayer){
 	
 	if(*nextplayer == PLAYER_A)
 		*nextplayer = *nextplayer+1;
 	else
 		*nextplayer = *nextplayer-1;
-}
+}*/
 
-char symbol(char nextplayer){
+/*char symbol(char nextplayer){
 
 	switch(nextplayer){
 		case PLAYER_A:
@@ -75,7 +96,7 @@ char symbol(char nextplayer){
 			break;
 	}
 	return BLANK_CHAR;
-}
+}*/
 
 
 char moveIsValid(TTTgrid * game, char move1, char move2){
