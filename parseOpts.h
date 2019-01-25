@@ -1,3 +1,6 @@
+#ifndef parseOpts_h
+#define parseOpts_h
+
 
 #include "baseHeader.h"
 #include <string.h>
@@ -13,4 +16,4 @@
 
 char parseOpts(int argc, char const *argv[]);
 
-
+#endif

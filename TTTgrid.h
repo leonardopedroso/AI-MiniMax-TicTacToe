@@ -1,3 +1,5 @@
+#ifndef TTTgrid_h
+#define TTTgrid_h
 
 #include "baseHeader.h"
 
@@ -38,3 +40,4 @@ private:
 
 void copyTTTgrid(TTTgrid * to, TTTgrid * from);
 
+#endif

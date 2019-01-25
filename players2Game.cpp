@@ -42,7 +42,7 @@ char players2Game(char MODE){
 		}else{
 			move = -1;
 			getAiMove(game, &move);
-			printf("move %d\n", move);
+			printf("AI move: %d,%d\n", move/SIZE_GRID, move%SIZE_GRID);
 		}
 		game.add(move, symbol(nextplayer));
 		updateNextPlayer(&nextplayer);
@@ -76,28 +76,6 @@ void getHumanMove(TTTgrid * game, char * move, char * player){
 
 	*move = (move1-ASCII_OFFSET)*SIZE_GRID+(move2-ASCII_OFFSET);
 }
-
-/*void updateNextPlayer(char * nextplayer){
-	
-	if(*nextplayer == PLAYER_A)
-		*nextplayer = *nextplayer+1;
-	else
-		*nextplayer = *nextplayer-1;
-}*/
-
-/*char symbol(char nextplayer){
-
-	switch(nextplayer){
-		case PLAYER_A:
-			return CROSS;
-			break;
-		case PLAYER_B:
-			return BALL;
-			break;
-	}
-	return BLANK_CHAR;
-}*/
-
 
 char moveIsValid(TTTgrid * game, char move1, char move2){
 

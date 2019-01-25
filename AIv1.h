@@ -1,3 +1,5 @@
+#ifndef AIv1_h
+#define AIv1_h
 
 #include "baseHeader.h"
 #include "TTTgrid.h"
@@ -26,3 +28,5 @@ void miniMax(TTTgrid game, SEQ_MOVES * moves, char PLAYER, char idxFreedom);
 void updateNextPlayer(char * nextplayer);
 char updateNextPlayerR(char nextplayer);
 char symbol(char nextplayer);
+
+#endif

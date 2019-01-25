@@ -5,6 +5,8 @@
 - COMPUTES DECISION TREE EVERY TIME
 */
 
+
+
 #include "AIv1.h"
 
 SEQ_MOVES::SEQ_MOVES(char PLAYER){
@@ -35,10 +37,14 @@ void getAiMove(TTTgrid game, char * nextMove){
 			*nextMove = moves.moves[i];
 	}
 
+	#ifdef DEBUG
+
 	printf("Final  best moves\n");
 	for (int i = 0; i < PLAY_SIZE; ++i){	
 		printf("%d ",moves.moves[i]);
 	}	printf("\n");
+
+	#endif
 
 }
 
@@ -46,7 +52,7 @@ void miniMax(TTTgrid game, SEQ_MOVES * moves, char PLAYER, char idxFreedom){
 
 	if(game.status() != UNFINISHED){
 		moves->value = game.status();
-		printf("Game finished just returned %d\n", game.status());
+		//printf("Game finished just returned %d\n", game.status());
 		return;
 	}
 
@@ -62,9 +68,10 @@ void miniMax(TTTgrid game, SEQ_MOVES * moves, char PLAYER, char idxFreedom){
 				gameTry.add(i*SIZE_GRID+j, symbol(PLAYER));
 				
 				
-
+				#ifdef DEBUG
 				printf("New try on %d %d\n",i,j);
 				gameTry.display();
+				#endif
 	
 				miniMax(gameTry, &moveTry, updateNextPlayerR(PLAYER), idxFreedom+1);
 
@@ -80,10 +87,13 @@ void miniMax(TTTgrid game, SEQ_MOVES * moves, char PLAYER, char idxFreedom){
 					}
 				}
 
+				#ifdef DEBUG
 				printf("Best moves for each with freedom %d\n", idxFreedom);
 				for (int i = 0; i < PLAY_SIZE; ++i){	
 					printf("%d ",moves->moves[i]);
 				}	printf("value %d\n",moves->value);
+
+				#endif
 
 			}
 
@@ -97,23 +107,8 @@ void joinSEQ_MOVES(SEQ_MOVES * to, SEQ_MOVES * from, char idx){
 
 	to->value = from->value;
 
-	printf("idx %d\n", idx);
-
-	printf("TO ");
-	for (int i = 0; i < PLAY_SIZE; ++i){	
-		printf("%d ",to->moves[i]);
-	}printf("\n");
-
-	printf("FROM ");
-	for (int i = 0; i < PLAY_SIZE; ++i){	
-		printf("%d ",from->moves[i]);
-	}printf("\n");
-
 	for(char i = idx; i < PLAY_SIZE; i++){
 		to->moves[i] = from->moves[i];
-
-		/*if(from->moves[i] == M_INFINITY)
-			break;*/
 	}
 
 }
